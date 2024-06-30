@@ -12,7 +12,7 @@ const ResTabComponent = () => {
                     <li>
                         <a
                             onClick={() => setActiveTab(0)}
-                            className={`inline-flex cursor-pointer items-center gap-2 rounded border px-3 py-2 hover:shadow ${activeTab === 0 ? 'tab-color shadow' : ''}`}
+                            className={`inline-flex cursor-pointer items-center gap-2 rounded border px-3 py-2 dark:bg-gray-800 dark:text-white hover:shadow ${activeTab === 0 ? 'tab-color shadow' : ''}`}
                         >
                             সব
                         </a>
@@ -20,7 +20,7 @@ const ResTabComponent = () => {
                     <li>
                         <a
                             onClick={() => setActiveTab(1)}
-                            className={`inline-flex cursor-pointer items-center gap-2 rounded border px-3 py-2  hover:shadow ${activeTab === 1 ? 'tab-color shadow' : ''}`}
+                            className={`inline-flex cursor-pointer items-center gap-2 rounded border px-3 py-2 dark:bg-gray-800 dark:text-white  hover:shadow ${activeTab === 1 ? 'tab-color shadow' : ''}`}
                         >
                             বোনাস
                         </a>

@@ -19,7 +19,7 @@ const Module = ({ data }) => {
             {(
                 data.map(item => (
                     <div key={item.id}>
-                        <div className="w-full max-w-md overflow-hidden rounded-lg bg-white shadow border-2 border-[#E5E7EB] border-transparent hover:border-[#12B76A] transition duration-300">
+                        <div className="w-full max-w-md overflow-hidden rounded-lg dark:bg-gray-800 dark:text-white bg-white shadow border-2 border-[#E5E7EB] border-transparent hover:border-[#12B76A] transition duration-300">
                             <div className="p-4">
                                 <div className="flex justify-between items-start">
                                     <div className="bg-[#12B76A] text-white px-3 py-1 text-center inline-block rounded-lg mb-3">
@@ -34,7 +34,7 @@ const Module = ({ data }) => {
                                     </div>
                                 </div>
                                 <div className="mt-5">
-                                    <h3 className="text-2xl text-gray-900 mt-5 font-extrabold text-left">{item.heading}</h3>
+                                    <h3 className="text-2xl text-gray-900 dark:text-white mt-5 font-extrabold text-left">{item.heading}</h3>
                                 </div>
                                 <div className="flex justify-between gap-5">
                                     <button onClick={() => modalHandler(item)} className="w-full flex items-center justify-center bg-[#EAECF0] text-black py-2 rounded-md mt-4 font-semibold">

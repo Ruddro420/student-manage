@@ -21,7 +21,7 @@ const ClassSummaryRecording = ({ data }) => {
                                 {data?.map(item => (
                                     <tr key={item.id} className="text-gray-700 dark:text-gray-400">
                                         <td className="px-4 py-3">
-                                            <div className="flex items-center text-sm">
+                                            <div className="font-semibold w-20 lg:w-full">
                                                 <div>
                                                     <p className="font-semibold">{item.title}</p>
                                                 </div>
@@ -31,8 +31,8 @@ const ClassSummaryRecording = ({ data }) => {
                                             {item.date}
                                         </td>
                                         <Link to={`/dashboard/class-recording/${item.id}`}>
-                                            <td className="px-4 py-3 text-sm flex items-center bg-[#F3F4F6] cursor-pointer w-1/3 rounded m-2 hover:bg-slate-400">
-                                                <div className="flex items-center">
+                                            <td className="px-4 py-3 text-sm flex items-center justify-between dark:bg-gray-800 dark:text-white border  bg-[#F3F4F6] cursor-pointer w-[90px] rounded m-2 hover:bg-slate-400">
+                                                <div className="flex items-center rk:text-white">
                                                     <span className="mr-1">দেখুন</span>
                                                     <Play />
                                                 </div>

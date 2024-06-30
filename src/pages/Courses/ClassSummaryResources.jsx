@@ -37,7 +37,7 @@ const ClassSummaryResources = ({ data }) => {
                                         <td className="px-4 py-3 text-sm">
                                             {item.date}
                                         </td>
-                                        <button className="px-4 py-3 text-sm flex items-center bg-[#F3F4F6] cursor-pointer w-1/3 rounded m-2 hover:bg-slate-400" onClick={() => modalHandler(item)}>
+                                        <button className="px-2 py-3 text-sm flex items-center justify-between dark:bg-gray-800 dark:text-white border  bg-[#F3F4F6] cursor-pointer w-[100px] rounded m-2 hover:bg-slate-400" onClick={() => modalHandler(item)}>
                                             <td >
                                                 <div className="flex items-center">
                                                     <span className="mr-1">চেক করুন</span>

@@ -5,7 +5,7 @@ const Sidebar = () => {
     const [activeTab, setActiveTab] = useState(0); // State to manage active tab index
 
     return (
-        <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+        <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0 translate-x-1">
             <div className="py-4 text-gray-500 dark:text-gray-400">
                 <Link
                     className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
