@@ -23,7 +23,7 @@ const ProfileMenu = () => {
             className="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
             aria-label="submenu"
           >
-            <Link to="/dashboard/profile">
+            <Link onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)} to="/dashboard/profile">
               <li className="flex">
                 <a
                   className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
@@ -46,7 +46,7 @@ const ProfileMenu = () => {
               </li>
             </Link>
 
-            <li className="flex">
+            <li onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)} className="flex">
               <a
                 className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                 href="#"
@@ -67,7 +67,7 @@ const ProfileMenu = () => {
                 <span>Settings</span>
               </a>
             </li>
-            <li className="flex">
+            <li onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)} className="flex">
               <a
                 className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                 href="#"

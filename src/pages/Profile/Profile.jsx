@@ -4,29 +4,18 @@ const Profile = () => {
   return (
     <div className="container px-6 mx-auto pb-8 flex-col  dark:text-white flex justify-center">
       <div className="profile-heading  flex flex-wrap gap-6 justify-center text-center w-full my-4">
-        <div className="w-full lg:w-[45%] text-left  text-2xl font-semibold ">
+        <div className="flex-1 text-left  text-2xl font-semibold ">
           প্রোফাইল
         </div>
-        <div className="w-full lg:w-[45%] p-4"></div>
+        <div className="flex-1 p-4"></div>
       </div>
 
-      <div className="profile-section  flex flex-wrap gap-6 justify-center text-center w-full ">
+      <div className="profile-section grid grid-cols-1 lg:grid-cols-2 gap-6 justify-center text-center w-full">
         {/* Profile Section */}
-        <div className="w-full lg:w-[45%] border rounded-xl p-4">
+        <div className="flex-1 border rounded-xl p-4">
           <di className="text-left font-semibold flex text-lg mb-4">
            পার্সোনাল ডিটেইলস
           </di>
-          {/* <div className="flex flex-col gap-4 items-center justify-center">
-            <img
-              className="w-24"
-              src="https://i.postimg.cc/g0Y988sm/user-min.png"
-              alt="profile_image"
-            />
-            <div className="text-xl">Picture Update 150✕150 px</div>
-            <button className="border mb-4 text-white px-5 py-2 rounded flex items-center hover:bg-gray-500 bg-gray-600">
-              Add Profile Picture
-            </button>
-          </div> */}
           <form action="">
             <div className="w-full">
               <label className="block text-sm text-left">
@@ -35,7 +24,8 @@ const Profile = () => {
                 </span>
                 <input
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="Your Name"
+                 
+                  placeholder="পুরো নাম"
                   type="text"
                 />
               </label>
@@ -87,21 +77,21 @@ const Profile = () => {
                 <input
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Your Phone"
+                 
                   type="number"
                 />
               </label>
 
-              <button className="w-full flex justify-center items-center px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent rounded-lg hover:bg-gray-800 focus:outline-none focus:shadow-outline-purple">
+              <button className="w-full flex gap-2 justify-center items-center px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-black border border-transparent rounded-lg hover:bg-gray-800 focus:outline-none focus:shadow-outline-purple">
               
+                  আপডেট 
                   <Check />
-                  আপডেট
-                
               </button>
             </div>
           </form>
         </div>
         {/* Password section */}
-        <div className="w-full lg:w-[45%]">
+        <div className="flex-1">
           <div className="border rounded-xl p-4">
             <di className="text-left font-semibold flex text-lg mb-4">
               পাসওয়ার্ড পরিবর্তন
