@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-
 const ProgressBar = ({ percentage, color, label,text }) => {
     return (
         <div className="w-[200px] bg-gray-200 rounded-full h-6 mb-4">
@@ -14,7 +12,7 @@ const ProgressBar = ({ percentage, color, label,text }) => {
 
             </div>
             <div className='mt-3'>
-                <h2 className='font-bold'>{text} {label}%</h2>
+                <h2 className='font-bold dark:text-white'>{text} {label}%</h2>
             </div>
         </div>
     );

@@ -29,10 +29,10 @@ const Assingment = () => {
             <div className="grid gap-10 mb-8 md:grid-cols-2 mt-5">
                 {/* Left Bar */}
                 <div>
-                    <div className="mt-3 text-justify">
+                    <div className="mt-3 text-justify dark:text-white">
                         {getData.description}
                     </div>
-                    <div className="mt-8">
+                    <div className="mt-8 dark:text-white">
                         <p><b>Submission Instruction : Please submit your home work link.</b></p>
                         <p className="mt-3">শুধুমাত্র এই মডিউল এ, আপনাদের এসাইনমেন্ট টি গিটহাবে সাবমিট করা বাধ্যতামূলক নয়। আপনারা ডক ফাইলে বা অন্য কোনো উপায়ে এসাইনমেন্ট টি সাবমিট করতে পারবেন।</p>
                     </div>

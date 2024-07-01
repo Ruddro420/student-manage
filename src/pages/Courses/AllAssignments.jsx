@@ -7,7 +7,7 @@ const AllAssignments = ({ data }) => {
         <>
             {data.map(module => (
                 <div key={module.id} className="module-container">
-                    <div className="p-3 border rounded-lg mb-2 mt-5 bg-[#1D2939] text-white">
+                    <div className="lg:p-3 p-1 border rounded-lg mb-2 mt-5 bg-[#1D2939] text-white dark:bg-gray-800 dark:text-white">
                         <h1>{module.title}</h1>
                     </div>
                     <div className="w-full overflow-hidden rounded-lg shadow-xs">
@@ -34,7 +34,7 @@ const AllAssignments = ({ data }) => {
                                                 {assignment.deadline}
                                             </td>
                                             <Link to={`/dashboard/assingment/${assignment.id}`}>
-                                                <td className="px-4 py-3 text-sm flex items-center justify-between bg-[#F3F4F6] cursor-pointer w-1/3 rounded m-2 hover:bg-slate-400">
+                                                <td className="px-4 py-3 text-sm flex items-center justify-between dark:bg-gray-800 dark:text-white border  bg-[#F3F4F6] cursor-pointer w-[90px] rounded m-2 hover:bg-slate-400">
                                                     <div className="flex items-center">
                                                         <span className="mr-1">দেখুন</span>
                                                         <Eye />
