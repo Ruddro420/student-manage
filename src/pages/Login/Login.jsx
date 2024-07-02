@@ -53,14 +53,14 @@ const Login = () => {
                                 <hr className="my-8" />
 
 
-                                <p className="mt-4">
+                                {/* <p className="mt-4">
                                     <a
                                         className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                                         href="./forgot-password.html"
                                     >
                                         Forgot your password?
                                     </a>
-                                </p>
+                                </p> */}
                                 <p className="mt-1">
                                     <Link className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                                         to="/">
