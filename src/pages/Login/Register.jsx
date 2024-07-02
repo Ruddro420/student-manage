@@ -1,11 +1,57 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
 
+  const [courses, setCourses] = useState([])
+  const axiosSecure = useAxiosSecure();
+  const {createUser} = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    axiosSecure.get('/courses')
+      .then(res => {
+        setCourses(res.data)
+      })
+      .catch(err => console.log(err))
+  }, [axiosSecure])
+
+  console.log(courses)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const formdata = new FormData(e.target);
+    const payload = Object.fromEntries(formdata.entries());
+    toast.promise(createUser({email: payload.email, password: payload.password})
+    .then(res => {
+      console.log(res)
+      axiosSecure.post('/students', {...payload, batch: parseInt(payload.batch), })
+      .then(result => {
+        console.log(result.data)
+        navigate('/dashboard')
+      })
+     
+    })
+    .catch(err => {
+      console.log(err)
+    throw new Error(err.message)
+    
+    })
+    , {
+      loading: 'Loading',
+      success: 'Account created successfully',
+      error: (err) => err.message
+    })
+    
+  }
 
 
   return (
     <>
+    <Toaster/>
       <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
         <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
           <div className="flex flex-col overflow-y-auto md:flex-row">
@@ -24,7 +70,7 @@ const Register = () => {
               />
             </div>
             <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-              <form className="w-full">
+              <form onSubmit={handleSubmit} className="w-full">
                 <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                   Create account
                 </h1>
@@ -36,6 +82,7 @@ const Register = () => {
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="example@email.com"
                     type="email"
+                    name="email"
                   />
                 </label>
                 <label className="block text-sm mt-4">
@@ -46,19 +93,31 @@ const Register = () => {
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="+8801xxxxxxxx"
                     type="number"
+                    name="phone"
                   />
                 </label>
                 <label className="block mt-4 text-sm">
                   <span className="text-gray-700 dark:text-gray-400">
                     Course Name
                   </span>
-                  <select className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                  <select name="courseId" className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                     <option>Select Course</option>
-                    <option value="Graphics Design">Graphics Design</option>
-                    <option value="Digital Marketing">Digital Marketing</option>
-                    <option value="Web Development">Web Development</option>
+                    {courses.map(course => <option key={course.id} value={course.id}>{course.title}-{course.batch}</option>)}
                   </select>
                 </label>
+
+                <label className="block text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Batch No.
+                  </span>
+                  <input
+                    className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                    placeholder="Batch"
+                    type="number"
+                    name="batch"
+                  />
+                </label>
+               
                 <label className="block mt-4 text-sm">
                   <span className="text-gray-700 dark:text-gray-400">
                     Admission Slip No
@@ -67,6 +126,7 @@ const Register = () => {
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="***************"
                     type="number"
+                    name="admission_slip"
                   />
                 </label>
                 <label className="block mt-4 text-sm">
@@ -77,6 +137,7 @@ const Register = () => {
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="***************"
                     type="password"
+                    name="password"
                   />
                 </label>
                 <button

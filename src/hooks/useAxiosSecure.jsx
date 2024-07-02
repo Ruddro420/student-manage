@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axiosSecure = axios.create({
-    baseURL: import.meta.env.VITE_serverKey,
+    baseURL: 'http://localhost:3000',
     headers: {
         'content-type': 'application/json'
     },

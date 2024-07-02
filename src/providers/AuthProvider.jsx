@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
-import { app } from "@/firebase/firebase.config";
+import  app  from "../firebase/firebase.config.js";
 import useAxiosSecure from '../hooks/useAxiosSecure';
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   
-  const createUser = (email, password) => {
+  const createUser = ({email, password}) => {
     setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password);
   }
@@ -58,17 +58,12 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
-      if(currentUser) {
-            //get token and store in client
-            axiosSecure.post('/jwt', {email: currentUser.email})
-            .then(data => {
-              console.log('found token!')
-                localStorage.setItem('access-token', data.data.token);
-            })
+      // if(currentUser) {
+           
             
-      } else {
-          //
-      }
+      // } else {
+      //     //
+      // }
       setTimeout(()=> {
         setLoading(false)
       }, 3000)
