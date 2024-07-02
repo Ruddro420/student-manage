@@ -1,29 +1,16 @@
 import {  ArrowRightFromLine } from "lucide-react";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from '../../hooks/useAuth';
 
 const Courses = () => {
     const {user} = useAuth()
-    const [student, setStudent] = useState({})
-    const axiosSecure = useAxiosSecure()
-    useEffect(()=> {
-        axiosSecure.get(`/users/${user?.email}`)
-        .then(res => {
-            setStudent(res.data)
-        })
-        .catch(err => console.log(err))
-    }, [axiosSecure, user])
-
-    console.log(student)
+    const {data} = user
+    console.log(data);
     return (
         <>
-        {!student ? 
-        <div className="absolute top-0 right-0 bg-white h-screen w-screen dark:bg-gray-900">
-            Loding...
-
-        </div>:
+        
         <div className="container px-6 mx-auto grid">
             <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                 আমার কোর্সসমূহ
@@ -54,7 +41,7 @@ const Courses = () => {
 
             </div>
 
-        </div>}
+        </div>
         </>
     );
 };
