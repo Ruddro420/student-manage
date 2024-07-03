@@ -1,28 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import LiveClass from '../Recording/LiveClass';
 import Module from './Module';
 import AllAssignments from './AllAssignments';
 import ResourceTable from "../../components/Table/ResourceTable"; 
-import data from '../../../data/module.json'
 
-const CourseTab = () => {
+const CourseTab = ({data}) => {
     const [activeTab, setActiveTab] = useState(0);
-    /* const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true); */
-
-    // Get module data
-    /* useEffect(() => {
-        axios.get('../../../data/module.json')
-            .then(function (response) {
-                setData(response.data);
-                setLoading(false); 
-            })
-            .catch(function (error) {
-                console.log(error);
-                setLoading(false); 
-            });
-    }, []); */
-
     return (
         <div>
             
@@ -65,12 +49,12 @@ const CourseTab = () => {
                 <div className={`${activeTab === 1 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <AllAssignments data={data} />
                 </div>
-                <div className={`${activeTab === 2 ? 'block' : 'hidden'} transition-opacity duration-600`}>
+               {/*  <div className={`${activeTab === 2 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <LiveClass data={data} />
                 </div>
                 <div className={`${activeTab === 3 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <ResourceTable data={data} />
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import { dateFormat } from "../../lib/date";
 
 const AllAssignments = ({ data }) => {
     return (
         <>
-            {data.map(module => (
-                <div key={module.id} className="module-container">
+            {data?.modules.map(module => (
+                <>
+                {module.assignments.length > 0 && <div key={module.id} className="module-container">
                     <div className="lg:p-3 p-1 border rounded-lg mb-2 mt-5 bg-[#1D2939] text-white dark:bg-gray-800 dark:text-white">
                         <h1>{module.title}</h1>
                     </div>
@@ -31,7 +33,7 @@ const AllAssignments = ({ data }) => {
                                                 </div>
                                             </td>
                                             <td className="px-4 py-3 text-sm w-1/3">
-                                                {assignment.deadline}
+                                                {dateFormat(assignment.deadline)}
                                             </td>
                                             <Link to={`/dashboard/assingment/${assignment.id}`}>
                                                 <td className="px-4 py-3 text-sm flex items-center justify-between dark:bg-gray-800 dark:text-white border  bg-[#F3F4F6] cursor-pointer w-[90px] rounded m-2 hover:bg-slate-400">
@@ -47,7 +49,8 @@ const AllAssignments = ({ data }) => {
                             </table>
                         </div>
                     </div>
-                </div>
+                </div>}
+                </>
             ))}
         </>
     );
