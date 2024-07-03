@@ -3,11 +3,10 @@ import useAuth from "../../hooks/useAuth";
 import CourseTab from "./CourseTab";
 
 const CourseDetails = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  // Get Main Data
   const { user } = useAuth();
   const { data } = user;
-
-  console.log(data.course)
 
   return (
     <div className="container lg:px-6  mx-auto grid">

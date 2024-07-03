@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ResourceTable from '../../components/Table/ResourceTable';
 import NoDataFound from '../../components/NoDataFound/NoDataFound';
 
-const ResTabComponent = () => {
+const ResTabComponent = ({data}) => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
@@ -29,7 +29,7 @@ const ResTabComponent = () => {
             </div>
             <div className="py-3">
                 <div className={`${activeTab === 0 ? 'block' : 'hidden'} transition-opacity duration-600`}>
-                    <ResourceTable />
+                    <ResourceTable data={data}/>
                 </div>
                 <div className={`${activeTab === 1 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <NoDataFound />

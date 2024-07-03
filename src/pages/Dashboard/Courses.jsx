@@ -8,7 +8,6 @@ const Courses = () => {
     // Get Main Data
     const {user} = useAuth()
     const {data} = user;
-    console.log(data);
     return (
         <>
         

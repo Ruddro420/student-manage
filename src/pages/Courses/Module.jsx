@@ -14,8 +14,6 @@ const Module = ({ data }) => {
         setModalData(id);
     };
 
-    console.log(data.modules);
-
     return (
         <div className="grid gap-10 mb-8 md:grid-cols-3">
             {(

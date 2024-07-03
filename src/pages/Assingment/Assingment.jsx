@@ -18,20 +18,18 @@ const Assingment = () => {
     useEffect(()=>{
         axiosSecure.get('/courses/assignments/'+ id)
         .then(res=>{
-            // console.log(res.data);
-            setAssignment(res.data)
-        })
-
-        axiosSecure.get(`/assignments/submission/${data?.id}/${assignment?.moduleId}/${assignment?.id}`)
-        .then(res=>{
             console.log(res.data);
-            setMySubmission(res.data)
+            
+            setAssignment(res.data)
+            updateSubmission(res.data.moduleId, res.data.id)
         })
 
-    }, [axiosSecure, id, data.id,])
+       
 
-    const updateSubmission = () => {
-        axiosSecure.get(`/assignments/submission/${data?.id}/${assignment?.moduleId}/${assignment?.id}`)
+    }, [axiosSecure, id])
+
+    const updateSubmission = (moduleId, assignmentId) => {
+        axiosSecure.get(`/assignments/submission/${data?.id}/${moduleId}/${assignmentId}`)
         .then(res=>{
             console.log(res.data);
             setMySubmission(res.data)
@@ -46,7 +44,7 @@ const Assingment = () => {
             task: e.target.task.value,
             moduleId: assignment.moduleId,
         }).then(()=>{
-            updateSubmission()
+            updateSubmission(assignment.moduleId, assignment.id)
         }), {
             loading: 'Submitting assignment...',
             success: <b>Successfully Submitted!</b>,
@@ -77,13 +75,13 @@ const Assingment = () => {
                 {/* Right Bar */}
                 <div className="col-span-1 bg-[#1D2939] text-white p-5 rounded">
                     <div>
-                    <div className="flex justify-between">{mySubmission?.status === "confirm" && <h2 className="text-2xl">মার্ক পেয়েছেন <b className="bg-[#12B76A] text-white px-5 py-1 rounded">{mySubmission?.mark}</b></h2>}
+                    <div className=" justify-between">{mySubmission?.status === "confirm" && <h2 className="text-2xl">মার্ক পেয়েছেন <b className="bg-[#12B76A] text-white px-5 py-1 rounded">{mySubmission?.marks}</b></h2>}
                         {mySubmission?.status === 'pending' && <p className="bg-[#9333EA] text-white px-5 py-1 rounded">Pending</p>}
                         </div>
-                        <div className="mt-8">
+                        {mySubmission?.feedback && <div className="mt-8">
                             <h4 className="text-[#12B76A] mb-3">ইন্সট্র্যাক্টর ফিডব্যাক</h4>
-                            <p>Congratulations!! You have done very well. Keep up the good work. Wish you all the best.</p>
-                        </div>
+                            <p>{mySubmission.feedback}</p>
+                        </div>}
                         <div className="mt-5">
                             <label className="block text-sm">
                                 <div className="flex justify-between">

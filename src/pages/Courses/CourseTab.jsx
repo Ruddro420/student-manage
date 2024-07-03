@@ -49,12 +49,12 @@ const CourseTab = ({data}) => {
                 <div className={`${activeTab === 1 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <AllAssignments data={data} />
                 </div>
-               {/*  <div className={`${activeTab === 2 ? 'block' : 'hidden'} transition-opacity duration-600`}>
+                <div className={`${activeTab === 2 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <LiveClass data={data} />
                 </div>
                 <div className={`${activeTab === 3 ? 'block' : 'hidden'} transition-opacity duration-600`}>
                     <ResourceTable data={data} />
-                </div> */}
+                </div>
             </div>
         </div>
     );
