@@ -69,7 +69,7 @@ const Header = () => {
                     </div>
                     <ul className="flex items-center flex-shrink-0 space-x-6">
                         {/* Notification Menu */}
-                        <NotificationMenu />
+                        {/* <NotificationMenu /> */}
 
                         {/* Profile Menu */}
                         <ProfileMenu />

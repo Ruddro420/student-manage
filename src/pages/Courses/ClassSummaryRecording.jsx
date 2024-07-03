@@ -4,7 +4,6 @@ import {  Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ClassSummaryRecording = ({ data }) => {
-    console.log(data);
     return (
         <>
             <div>
