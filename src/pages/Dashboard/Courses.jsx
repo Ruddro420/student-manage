@@ -1,38 +1,22 @@
-import { ArrowRightFromLine } from "lucide-react";
-import { useEffect, useState } from "react";
+import {  ArrowRightFromLine } from "lucide-react";
+// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAuth from "../../hooks/useAuth";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from '../../hooks/useAuth';
 
 const Courses = () => {
-  const { user } = useAuth(); 
-  const [student, setStudent] = useState(null);
-  const axiosSecure = useAxiosSecure();
-  useEffect(() => {
-    // Fetch student data when component mounts or when 'user' changes
-    const fetchStudentData = async () => {
-      try {
-        const response = await axiosSecure.get(`/users/${user?.email}`);
-        setStudent(response.data);
-      } catch (error) {
-        console.error("Error fetching student data:", error);
-      }
-    };
-    fetchStudentData();
-  }, [axiosSecure, user]);
-
-  return (
-    <>
-      {!student ? (
-        <div className="absolute top-0 right-0 bg-white h-screen w-screen dark:bg-gray-900 flex items-center justify-center">
-          Loading...
-        </div>
-      ) : (
+    // Get Main Data
+    const {user} = useAuth()
+    const {data} = user;
+    console.log(data);
+    return (
+        <>
+        
         <div className="container px-6 mx-auto grid">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             আমার কোর্সসমূহ
           </h2>
-          {student.courses.map((course) => (
+          {data.courses.map((course) => (
             <div key={course.course.id} className="grid gap-10 mb-8 md:grid-cols-2">
               <div className="max-w-md overflow-hidden rounded-lg bg-white shadow">
                 <img
@@ -56,7 +40,7 @@ const Courses = () => {
                   </div>
                   <div>
                     <Link
-                      to="/dashboard/course-details"
+                      to={`/dashboard/course-details/${course.course.id}`}
                       className="hover:bg-slate-500 w-full flex items-center justify-center bg-black text-white py-2 rounded-md mt-4"
                     >
                       এগিয়ে যাই <ArrowRightFromLine className="ml-3" />
@@ -67,7 +51,6 @@ const Courses = () => {
             </div>
           ))}
         </div>
-      )}
     </>
   );
 };

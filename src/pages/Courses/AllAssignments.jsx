@@ -3,9 +3,10 @@ import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AllAssignments = ({ data }) => {
+    console.log(data)
     return (
         <>
-            {data.map(module => (
+            {data?.modules.map(module => (
                 <div key={module.id} className="module-container">
                     <div className="lg:p-3 p-1 border rounded-lg mb-2 mt-5 bg-[#1D2939] text-white dark:bg-gray-800 dark:text-white">
                         <h1>{module.title}</h1>

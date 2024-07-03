@@ -9,7 +9,7 @@ const Modal = ({ isOpen, setIsOpen, modalData }) => {
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                     <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-md w-full p-6">
                         <div className="flex justify-between items-center pb-3">
-                            <h3 className="text-xl font-semibold">{modalData.heading}</h3>
+                            <h3 className="text-xl font-semibold">{modalData.title}</h3>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className="text-gray-400 hover:text-gray-600"
@@ -31,7 +31,7 @@ const Modal = ({ isOpen, setIsOpen, modalData }) => {
                             </button>
                         </div>
                         <div className="">
-                            {modalData.description}
+                            {modalData.study_plan}
                         </div>
                     </div>
                 </div>
