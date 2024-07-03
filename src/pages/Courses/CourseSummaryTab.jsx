@@ -37,7 +37,7 @@ const CourseSummaryTab = ({ data }) => {
             </div>
             <div className="py-3 ml-3">
                 <div className={`${activeTab === 0 ? 'block' : 'hidden'} transition-opacity duration-600`}><ClassSummaryAssingment data={data.assignments} /></div>
-                <div className={`${activeTab === 1 ? 'block' : 'hidden'} transition-opacity duration-600`}><ClassSummaryRecording data ={data.class} /></div>
+                <div className={`${activeTab === 1 ? 'block' : 'hidden'} transition-opacity duration-600`}><ClassSummaryRecording data ={data.recordings} /></div>
                 <div className={`${activeTab === 2 ? 'block' : 'hidden'} transition-opacity duration-600`}><ClassSummaryResources data={data.resources} /></div>
             </div>
         </div>

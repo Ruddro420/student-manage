@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const AllAssignments = ({ data }) => {
     console.log(data)
+    console.log(data);
     return (
         <>
             {data?.modules.map(module => (
