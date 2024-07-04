@@ -72,16 +72,16 @@ const Performance = () => {
               <ProgressBar
                 percentage={user.data.courseProgressPercentage}
                 color="#12B76A"
-                text="সামগ্রিক প্রোগ্রেস"
+                text="কোর্স প্রোগ্রেস"
                 label={convertToBengali(parseInt(user.data.courseProgressPercentage))}
               />
             </div>
             <div>
               <ProgressBar
-                percentage={user.data.classPerformancePercentage + user.data.homeworkPercentage}
+                percentage={parseInt((user.data.classPerformancePercentage + user.data.homeworkPercentage + user.data.assignmentPercentage) / 3)}
                 color="#9333EA"
-                text="ক্লাস উপস্থিতি"
-                label={convertToBengali(parseInt(user.data.classPerformancePercentage + user.data.homeworkPercentage))}
+                text="টোটাল প্রোগ্রেস"
+                label={convertToBengali(parseInt((user.data.classPerformancePercentage + user.data.homeworkPercentage + user.data.assignmentPercentage) / 3))}
               />
             </div>
           </div>
