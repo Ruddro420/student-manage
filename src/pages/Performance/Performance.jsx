@@ -20,6 +20,7 @@ const Performance = () => {
   return (
     <>
     {user?
+  
     <div className="container px-6 mx-auto grid">
       <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         পারফর্মেন্স
@@ -58,9 +59,36 @@ const Performance = () => {
         {/* Right Side */}
         <div className="shadow p-5 rounded-lg border-2 pb-8 mt-3">
           <div className="mb-5 text-center">
-            <h2 className="text-2xl text-[#FE8924] font-extrabold">
-              বাহ! আপনি শিয়াল মামার মত এভারেজ।
-            </h2>
+          {
+  (parseInt(user.data.courseProgressPercentage) > 0 && parseInt(user.data.courseProgressPercentage) <= 33) ? (
+    <h2 className="text-2xl text-[#FE8924] font-extrabold">
+      এহ রে! আপনি কচ্ছপের মত এভারেজ।
+    </h2>
+  ) :<></>
+}
+{
+  (parseInt(user.data.courseProgressPercentage) > 33 && parseInt(user.data.courseProgressPercentage) < 50) && (
+    <h2 className="text-2xl text-[#FE8924] font-extrabold">
+      বাহ! আপনি হাতির মত এভারেজ।
+    </h2>
+  )
+}
+{
+  (parseInt(user.data.courseProgressPercentage) >= 50 && parseInt(user.data.courseProgressPercentage) < 80) && (
+    <h2 className="text-2xl text-[#FE8924] font-extrabold">
+      বাহ! আপনি শিয়াল মামার মত এভারেজ।
+    </h2>
+  )
+}
+{
+  (parseInt(user.data.courseProgressPercentage) >= 80 && parseInt(user.data.courseProgressPercentage) <= 100) && (
+    <h2 className="text-2xl text-[#FE8924] font-extrabold">
+      বাহ! আপনি চিতার মত এভারেজ।
+    </h2>
+  )
+}
+
+           
             <p className="dark:text-white">
               নিজেকে আরেকটু আপগ্রেড করেন, আরেকটু পুশ করেন। আপনার পক্ষে সম্ভব
               বেস্ট হয়ে উঠা।
