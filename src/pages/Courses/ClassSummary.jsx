@@ -18,7 +18,6 @@ const ClassSummary = () => {
     axiosSecure.get(`/courses/modules/${id}`)
       .then(res => {
         setData(res.data);
-        console.log(res.data);
       });
   }, [axiosSecure, id]);
 

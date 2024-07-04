@@ -2,6 +2,7 @@
 import { useState } from "react";
 import AssingPerformance from "./AssingPerformance";
 import ProgressBar from "./ProgressBar";
+import useAuth from "../../hooks/useAuth";
 
 // Utility function to convert numbers to Bengali
 const convertToBengali = (num) => {
@@ -13,8 +14,12 @@ const Performance = () => {
   const [kcal, setKcal] = useState(80);
   const [steps, setSteps] = useState(60);
   const [km, setKm] = useState(90);
+  const {user} = useAuth();
+  // console.log(user)
 
   return (
+    <>
+    {user?
     <div className="container px-6 mx-auto grid">
       <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         পারফর্মেন্স
@@ -24,8 +29,8 @@ const Performance = () => {
         <div className="lg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid gap-3  lg:justify-between">
           <div className="mt-3">
             <AssingPerformance
-              percentage={kcal}
-              label={convertToBengali(kcal)}
+              percentage={user.data.homeworkPercentage}
+              label={convertToBengali(parseInt(user.data.homeworkPercentage))}
               unit="%"
               color="#F97066"
               text="হোমওয়ার্ক"
@@ -33,8 +38,8 @@ const Performance = () => {
           </div>
           <div className="mt-3">
             <AssingPerformance
-              percentage={km}
-              label={convertToBengali(km)}
+              percentage={user.data.classPerformancePercentage}
+              label={convertToBengali(parseInt(user.data.classPerformancePercentage))}
               unit="%"
               color="#FFA36F"
               text="ক্লাস পারফর্মেন্স"
@@ -42,8 +47,8 @@ const Performance = () => {
           </div>
           <div className="mt-3">
             <AssingPerformance
-              percentage={steps}
-              label={convertToBengali(steps)}
+              percentage={user.data.assignmentPercentage}
+              label={convertToBengali(parseInt(user.data.assignmentPercentage))}
               unit="%"
               color="#FFAB00"
               text="এসাইনমেন্ট"
@@ -65,24 +70,25 @@ const Performance = () => {
           <div className="flex justify-between mt-5 lg:gap-0 gap-8 flex-wrap">
             <div>
               <ProgressBar
-                percentage={steps}
+                percentage={user.data.courseProgressPercentage}
                 color="#12B76A"
                 text="সামগ্রিক প্রোগ্রেস"
-                label={convertToBengali(steps)}
+                label={convertToBengali(parseInt(user.data.courseProgressPercentage))}
               />
             </div>
             <div>
               <ProgressBar
-                percentage={km}
+                percentage={user.data.classPerformancePercentage + user.data.homeworkPercentage}
                 color="#9333EA"
                 text="ক্লাস উপস্থিতি"
-                label={convertToBengali(steps)}
+                label={convertToBengali(parseInt(user.data.classPerformancePercentage + user.data.homeworkPercentage))}
               />
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div>: <div className="text-center">Loading...</div>}
+    </>
   );
 };
 

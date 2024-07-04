@@ -19,7 +19,6 @@ const Register = () => {
       .catch(err => console.log(err))
   }, [axiosSecure])
 
-  console.log(courses)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -32,6 +31,7 @@ const Register = () => {
       .then(result => {
         console.log(result.data)
         navigate('/dashboard')
+        window.location.reload()
       })
      
     })

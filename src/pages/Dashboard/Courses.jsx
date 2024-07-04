@@ -7,15 +7,14 @@ import useAuth from '../../hooks/useAuth';
 const Courses = () => {
     // Get Main Data
     const {user} = useAuth()
-    const {data} = user;
     return (
         <>
         
-        <div className="container px-6 mx-auto grid">
+        {user? <div className="container px-6 mx-auto grid">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             আমার কোর্সসমূহ
           </h2>
-          {data.courses.map((course) => (
+          {user?.data.courses.map((course) => (
             <div key={course.course.id} className="grid gap-10 mb-8 md:grid-cols-2">
               <div className="max-w-md overflow-hidden rounded-lg bg-white shadow">
                 <img
@@ -49,7 +48,9 @@ const Courses = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div>:<div className="h-screen flex justify-center items-center">
+        <p className="text-2xl">Loading...</p>
+      </div>}
     </>
   );
 };

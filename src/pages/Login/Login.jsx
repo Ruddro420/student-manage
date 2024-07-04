@@ -1,11 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const Login = () => {
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(()=> {
+    
+  if(user) {
+    navigate('/dashboard')
+  
+  }
+
+  }, [user, navigate])
   const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -89,7 +98,7 @@ const Login = () => {
                 <p className="mt-1">
                   <Link
                     className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                    to="/"
+                    to="/register"
                   >
                     Create account
                   </Link>
