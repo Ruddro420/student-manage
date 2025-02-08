@@ -2,10 +2,10 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { Toaster } from "react-hot-toast";
-/* import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import LoaderRequest from "../components/LoaderRequest/LoaderRequest"; */
+import LoaderRequest from "../components/LoaderRequest/LoaderRequest";
 
 const MainLayout = () => {
 /*   const { user } = useAuth();

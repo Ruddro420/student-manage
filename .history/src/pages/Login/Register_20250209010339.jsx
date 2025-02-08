@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
 
- /*  const [courses, setCourses] = useState([])
+  const [courses, setCourses] = useState([])
   const axiosSecure = useAxiosSecure();
   const {createUser} = useAuth()
   const navigate = useNavigate()
@@ -46,7 +47,7 @@ const Register = () => {
     })
     
   }
- */
+
 
   return (
     <>
@@ -69,7 +70,7 @@ const Register = () => {
               />
             </div>
             <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-              <form /* onSubmit={handleSubmit} */ className="w-full">
+              <form onSubmit={handleSubmit} className="w-full">
                 <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                   Create account
                 </h1>
@@ -101,7 +102,7 @@ const Register = () => {
                   </span>
                   <select name="courseId" className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                     <option>Select Course</option>
-                   {/*  {courses.map(course => <option key={course.id} value={course.id}>{course.title}-{course.batch}</option>)} */}
+                    {courses.map(course => <option key={course.id} value={course.id}>{course.title}-{course.batch}</option>)}
                   </select>
                 </label>
 

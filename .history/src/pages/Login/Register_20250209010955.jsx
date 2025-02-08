@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
@@ -101,7 +102,7 @@ const Register = () => {
                   </span>
                   <select name="courseId" className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                     <option>Select Course</option>
-                   {/*  {courses.map(course => <option key={course.id} value={course.id}>{course.title}-{course.batch}</option>)} */}
+                    {courses.map(course => <option key={course.id} value={course.id}>{course.title}-{course.batch}</option>)}
                   </select>
                 </label>
 

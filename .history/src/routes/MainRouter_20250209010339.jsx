@@ -13,7 +13,7 @@ import ClassSummary from "../pages/Courses/ClassSummary";
 import Assingment from "../pages/Assingment/Assingment";
 import VideoPlayer from "../pages/Recording/VideoPlayer";
 import Profile from "../pages/Profile/Profile";
-//import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import UserRecovery from "../pages/UserRecovery/UserRecovery";
 
 export const router = createBrowserRouter([
@@ -35,8 +35,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        // element: <PrivateRoute><MainLayout /></PrivateRoute>,
-        element: <MainLayout />,
+        element: <PrivateRoute><MainLayout /></PrivateRoute>,
         children: [
             {
                 path: "/dashboard",

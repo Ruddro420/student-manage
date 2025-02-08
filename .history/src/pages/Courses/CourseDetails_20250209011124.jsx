@@ -1,15 +1,14 @@
-//import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import CourseTab from "./CourseTab";
 
 const CourseDetails = () => {
-  //const { user } = useAuth();
-  const { user } = 'working';
+ // const { user } = useAuth();
  
   return (
     <>
-    {user ? <div className="container lg:px-6  mx-auto grid">
+    {/* user ? */ <div className="container lg:px-6  mx-auto grid">
       <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        {user.data.course.title}
+        {/* {user.data.course.title} */}
       </h2>
       {/*  <div className="flex items-center justify-between mx-2 p-4 mb-8 text-sm font-semibold text-purple-100 bg-[#12B76A] rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
                 <div className="flex items-center">

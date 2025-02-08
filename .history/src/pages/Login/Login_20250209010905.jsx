@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-/* import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { useEffect } from "react"; */
+import { useEffect } from "react";
 
 const Login = () => {
   /* const { signIn, user } = useAuth();
@@ -51,7 +51,7 @@ const Login = () => {
               />
             </div>
             <form
-            /*   onSubmit={handleSignIn} */
+              onSubmit={handleSignIn}
               className="flex items-center justify-center p-6 sm:p-12 md:w-1/2"
             >
               <div className="w-full">

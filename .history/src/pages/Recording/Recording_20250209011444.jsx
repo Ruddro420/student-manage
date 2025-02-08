@@ -10,7 +10,7 @@ const Recording = () => {
                 ক্লাস রেকর্ডিং সমূহ
             </h2>
             {/* Tab Component */}
-            <TabComponent  /* data={data.course} *//>
+            <TabComponent  data={data.course}/>
         </div>
     );
 };

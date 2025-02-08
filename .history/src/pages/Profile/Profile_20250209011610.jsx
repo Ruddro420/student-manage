@@ -2,9 +2,9 @@ import { Check } from "lucide-react";
 
 
 const Profile = () => {
- /*  const { user } = useAuth();
+  const { user } = useAuth();
   const { data } = user;
-  console.log(data); */
+  console.log(data);
   return (
     <div className="container px-6 mx-auto pb-8 flex-col  dark:text-white flex justify-center">
       <div className="profile-heading  flex flex-wrap gap-6 justify-center text-center w-full my-4">

@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-/* import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { useEffect } from "react"; */
+import { useEffect } from "react";
 
 const Login = () => {
-  /* const { signIn, user } = useAuth();
+  const { signIn, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(()=> {
@@ -30,7 +30,7 @@ const Login = () => {
         toast.error('Something Went Wrong')
         console.log(err);
       });
-  }; */
+  };
   return (
     <>
       <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -51,7 +51,7 @@ const Login = () => {
               />
             </div>
             <form
-            /*   onSubmit={handleSignIn} */
+              onSubmit={handleSignIn}
               className="flex items-center justify-center p-6 sm:p-12 md:w-1/2"
             >
               <div className="w-full">

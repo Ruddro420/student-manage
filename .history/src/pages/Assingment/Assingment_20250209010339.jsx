@@ -4,15 +4,16 @@ import { ClipboardCheckIcon, Link } from "lucide-react";
 
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { dateFormat } from "../../lib/date";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Assingment = () => {
-   /*  const {id} = useParams()
+    const {id} = useParams()
     const [assignment, setAssignment] = useState(null)
     const [mySubmission, setMySubmission] = useState(null)
     const axiosSecure = useAxiosSecure()
-    // const {user} = useAuth()
-    // const {data} = user
+    const {user} = useAuth()
+    const {data} = user
     // console.log(data);
     useEffect(()=>{
         axiosSecure.get('/courses/assignments/'+ id)
@@ -52,7 +53,7 @@ const Assingment = () => {
         
     }
     
-     */
+    
     
 
     return (

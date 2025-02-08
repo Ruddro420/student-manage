@@ -18,14 +18,14 @@ const Performance = () => {
 
   return (
     <>
-    {/* {user?
+    {user?
   
     <div className="container px-6 mx-auto grid">
       <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         পারফর্মেন্স
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-      
+        {/* Left Side */}
         <div className="lg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid gap-3  lg:justify-between">
           <div className="mt-3">
             <AssingPerformance
@@ -55,7 +55,7 @@ const Performance = () => {
             />
           </div>
         </div>
-        
+        {/* Right Side */}
         <div className="shadow p-5 rounded-lg border-2 pb-8 mt-3">
           <div className="mb-5 text-center">
           {
@@ -114,7 +114,7 @@ const Performance = () => {
           </div>
         </div>
       </div>
-    </div>: <div className="text-center">Loading...</div>} */}
+    </div>: <div className="text-center">Loading...</div>}
     </>
   );
 };

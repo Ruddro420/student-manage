@@ -1,9 +1,8 @@
-//import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import CourseTab from "./CourseTab";
 
 const CourseDetails = () => {
-  //const { user } = useAuth();
-  const { user } = 'working';
+  const { user } = useAuth();
  
   return (
     <>

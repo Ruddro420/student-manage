@@ -2,19 +2,21 @@ import {  ArrowRightFromLine } from "lucide-react";
 // import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from '../../hooks/useAuth';
 
 const Courses = () => {
     // Get Main Data
    // const {user} = useAuth()
-    //const {user} ='working'
+    const {user} = useAuth()
     return (
         <>
         
-        {/* {user? <div className="container px-6 mx-auto grid">
+        {user? <div className="container px-6 mx-auto grid">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             আমার কোর্সসমূহ
           </h2>
-         <div key={course.course.id} className="grid gap-10 mb-8 md:grid-cols-2">
+          {user?.data.courses.map((course) => (
+            <div key={course.course.id} className="grid gap-10 mb-8 md:grid-cols-2">
               <div className="max-w-md overflow-hidden rounded-lg bg-white shadow">
                 <img
                   src={course.course.photoURL || "../../../welcome.png"}
@@ -46,9 +48,10 @@ const Courses = () => {
                 </div>
               </div>
             </div>
+          ))}
         </div>:<div className="h-screen flex justify-center items-center">
         <p className="text-2xl">Loading...</p>
-      </div>} */}
+      </div>}
     </>
   );
 };

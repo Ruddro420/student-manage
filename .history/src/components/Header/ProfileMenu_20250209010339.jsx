@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const ProfileMenu = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
- /*  const { logOut } = useAuth();
+  const { logOut } = useAuth();
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -16,7 +17,7 @@ const ProfileMenu = () => {
       .catch((error) => {
         console.log(error);
       });
-  }; */
+  };
 
   return (
     <li className="relative">
