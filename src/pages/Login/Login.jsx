@@ -1,27 +1,48 @@
-import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+
+
 
 const Login = () => {
-  const { signIn } = useAuth();
+  const { register, handleSubmit, reset } = useForm();
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
 
-  const handleSignIn = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(email, password);
-    signIn(email, password)
-      .then((result) => {
-        console.log(result.user);
-        navigate("/dashboard");
+
+
+  const onSubmit = (data) => {
+
+
+    axios
+      .post(`${BASE_URL}/login/account`, {
+        email: data.email,
+        password: data.password,
       })
-      .catch((err) => {
-        toast.error('Something Went Wrong')
-        console.log(err);
+      .then((response) => {
+
+        if (response.data.message === 'Login successful') {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("user", JSON.stringify(response.data));
+          console.log(response.data);
+          toast.success(response.data.message);
+          reset();
+          navigate("/dashboard");
+        } else {
+          console.log('Response Message:', response.data.message);
+          toast.success(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Something Went Wrong");
       });
   };
+
+
+
   return (
     <>
       <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -42,20 +63,21 @@ const Login = () => {
               />
             </div>
             <form
-              onSubmit={handleSignIn}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex items-center justify-center p-6 sm:p-12 md:w-1/2"
             >
               <div className="w-full">
                 <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                   Login
                 </h1>
-                <label className="block text-sm">
+                <label className="block text-sm mt-4">
                   <span className="text-gray-700 dark:text-gray-400">
-                    Phone
+                    Email
                   </span>
                   <input
+                    {...register("email", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                    placeholder="Email"
+                    placeholder="example@email.com"
                     type="email"
                     name="email"
                   />
@@ -65,6 +87,7 @@ const Login = () => {
                     Password
                   </span>
                   <input
+                    {...register("password", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="***************"
                     type="password"
@@ -89,7 +112,7 @@ const Login = () => {
                 <p className="mt-1">
                   <Link
                     className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                    to="/"
+                    to="/register"
                   >
                     Create account
                   </Link>
