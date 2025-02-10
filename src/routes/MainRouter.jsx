@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
     },
     {
         path: 'recover',
-        element: <UserRecovery/>
+        element: <UserRecovery />
     },
     {
         path: "/dashboard",
@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/profile",
-                element: <Profile/>,
+                element: <Profile />,
             },
         ],
     },

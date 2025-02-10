@@ -1,56 +1,51 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
-
- /*  const [courses, setCourses] = useState([])
-  const axiosSecure = useAxiosSecure();
-  const {createUser} = useAuth()
+  const [courses, setCourses] = useState([])
   const navigate = useNavigate()
-
+  const { register, handleSubmit, reset } = useForm();
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  // load course data
+  const loadData = () => {
+    axios.get(`${BASE_URL}/course/data`).then((res) => {
+      setCourses(res.data.courses);
+    });
+  };
   useEffect(() => {
-    axiosSecure.get('/courses')
-      .then(res => {
-        setCourses(res.data)
-      })
-      .catch(err => console.log(err))
-  }, [axiosSecure])
+    loadData();
+  }, [BASE_URL]);
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formdata = new FormData(e.target);
-    const payload = Object.fromEntries(formdata.entries());
-    toast.promise(createUser({email: payload.email, password: payload.password})
-    .then(res => {
-      console.log(res)
-      axiosSecure.post('/students', {...payload, batch: parseInt(payload.batch), })
-      .then(result => {
-        console.log(result.data)
-        navigate('/dashboard')
-        window.location.reload()
+  const onSubmit = (data) => {
+    axios.post(`${BASE_URL}/create/account`, {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      course_name: data.course_name,
+      batch_no: data.batch_no,
+      admission_slip_no: data.admission_slip_no,
+      password: data.password,
+    })
+      .then(function () {
+        toast.success('Register Successfully')
+        //updateData()
+        reset()
       })
-     
-    })
-    .catch(err => {
-      console.log(err)
-    throw new Error(err.message)
-    
-    })
-    , {
-      loading: 'Loading',
-      success: 'Account created successfully',
-      error: (err) => err.message
-    })
-    
-  }
- */
+      .catch(function (error) {
+        console.log(error);
+        toast.error(error.message)
+      });
+
+  };
+
 
   return (
     <>
-    <Toaster/>
+      <Toaster />
       <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
         <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
           <div className="flex flex-col overflow-y-auto md:flex-row">
@@ -69,15 +64,28 @@ const Register = () => {
               />
             </div>
             <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
-              <form /* onSubmit={handleSubmit} */ className="w-full">
+              <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                 <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                   Create account
                 </h1>
                 <label className="block text-sm">
                   <span className="text-gray-700 dark:text-gray-400">
+                    Name
+                  </span>
+                  <input
+                    {...register("name", { required: true })}
+                    className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                    placeholder="Md Ali"
+                    type="text"
+                    name="name"
+                  />
+                </label>
+                <label className="block text-sm mt-4">
+                  <span className="text-gray-700 dark:text-gray-400">
                     Email
                   </span>
                   <input
+                    {...register("email", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="example@email.com"
                     type="email"
@@ -89,6 +97,7 @@ const Register = () => {
                     Phone
                   </span>
                   <input
+                    {...register("phone", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="+8801xxxxxxxx"
                     type="number"
@@ -99,9 +108,12 @@ const Register = () => {
                   <span className="text-gray-700 dark:text-gray-400">
                     Course Name
                   </span>
-                  <select name="courseId" className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                  <select
+                    {...register("course_name", { required: true })}
+                    name="course_name"
+                    className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                     <option>Select Course</option>
-                   {/*  {courses.map(course => <option key={course.id} value={course.id}>{course.title}-{course.batch}</option>)} */}
+                    {courses.map(course => <option key={course.id} value={course.course_name}>{course.course_name}-{course.batch_no}</option>)}
                   </select>
                 </label>
 
@@ -110,22 +122,24 @@ const Register = () => {
                     Batch No.
                   </span>
                   <input
+                    {...register("batch_no", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="Batch"
                     type="number"
-                    name="batch"
+                    name="batch_no"
                   />
                 </label>
-               
+
                 <label className="block mt-4 text-sm">
                   <span className="text-gray-700 dark:text-gray-400">
                     Admission Slip No
                   </span>
                   <input
+                    {...register("admission_slip_no", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="***************"
                     type="number"
-                    name="admission_slip"
+                    name="admission_slip_no"
                   />
                 </label>
                 <label className="block mt-4 text-sm">
@@ -133,23 +147,26 @@ const Register = () => {
                     Password
                   </span>
                   <input
+                    {...register("password", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="***************"
                     type="password"
                     name="password"
                   />
                 </label>
-                <button
+                <Link
+                  to="/"
+                  type="submit"
                   className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
                   Create account
-                </button>
+                </Link>
 
                 <hr className="my-8" />
                 <p className="mt-4">
                   <Link
                     className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                    to="login"
+                    to="/"
                   >
                     Already have an account? Login
                   </Link>
