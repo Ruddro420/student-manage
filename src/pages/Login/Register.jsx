@@ -154,13 +154,12 @@ const Register = () => {
                     name="password"
                   />
                 </label>
-                <Link
-                  to="/"
+                <button
                   type="submit"
                   className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 >
                   Create account
-                </Link>
+                </button>
 
                 <hr className="my-8" />
                 <p className="mt-4">
