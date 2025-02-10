@@ -11,34 +11,46 @@ const Login = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
 
+  const [studentData, setStudentData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Get module data
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/account/data`)
+      .then(function (response) {
+        console.log(response);
+
+        setStudentData(response.data.student);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+  }, [BASE_URL]);
 
   const onSubmit = (data) => {
 
 
-    axios
-      .post(`${BASE_URL}/login/account`, {
-        email: data.email,
-        password: data.password,
-      })
-      .then((response) => {
+    /* check data.email & data.password with the studentData>> if found console.log(true) else false*/
+    const found = studentData.find(
+      (student) => student.email === data.email && student.password === data.password
+    );
+    if (found) {
+      console.log("true");
+      // Save to localStorage
+      localStorage.setItem("student", JSON.stringify(found));
+      // Update context
+      // fetchStudentData(found.id);
+      // reset();
+      navigate("/dashboard");
+    } else {
+      console.log("false");
+      toast.error("Invalid email or password");
+    }
 
-        if (response.data.message === 'Login successful') {
-          localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("user", JSON.stringify(response.data));
-          console.log(response.data);
-          toast.success(response.data.message);
-          reset();
-          navigate("/dashboard");
-        } else {
-          console.log('Response Message:', response.data.message);
-          toast.success(response.data.message);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        toast.error("Something Went Wrong");
-      });
+
   };
 
 
