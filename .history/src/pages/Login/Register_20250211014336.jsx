@@ -3,50 +3,53 @@ import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useStudent } from "../../StudentContext";
+
 
 const Register = () => {
-  const [courses, setCourses] = useState([]);
-  const navigate = useNavigate();
+  const [courses, setCourses] = useState([])
+  const [studentID, setStudentId] = useState()
+  const navigate = useNavigate()
   const { register, handleSubmit, reset } = useForm();
-  const { fetchStudentData } = useStudent(); // Fetch student data from context
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const { fetchStudentData } = useStudent();
 
-  // Load course data
-  useEffect(() => {
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  // load course data
+  const loadData = () => {
     axios.get(`${BASE_URL}/course/data`).then((res) => {
       setCourses(res.data.courses);
     });
+  };
+  useEffect(() => {
+    loadData();
   }, [BASE_URL]);
+
 
   const onSubmit = (data) => {
     axios.post(`${BASE_URL}/create/account`, {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        course_name: data.course_name,
-        batch_no: data.batch_no,
-        admission_slip_no: data.admission_slip_no,
-        password: data.password,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      course_name: data.course_name,
+      batch_no: data.batch_no,
+      admission_slip_no: data.admission_slip_no,
+      password: data.password,
     })
-    .then(function (res) {
-        const studentData = res.data.student;
-        toast.success('Register Successfully');
-        // setStudentId(studentData.id);
+      .then(function (res) {
+        toast.success('Register Successfully')
+        setStudentId(res.data.student.id)
+        fetchStudentData(res.data.student.id);
+        //updateData()
+        reset()
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error(error.message)
+      });
 
-        // Save to localStorage
-        localStorage.setItem('student', JSON.stringify(studentData));
+  };
 
-        // Update context
-        fetchStudentData(studentData.id);
-
-        reset();
-    })
-    .catch(function (error) {
-        console.error(error);
-        toast.error(error.message);
-    });
-};
+  console.log(studentID);
+  
 
 
   return (
@@ -75,7 +78,9 @@ const Register = () => {
                   Create account
                 </h1>
                 <label className="block text-sm">
-                  <span className="text-gray-700 dark:text-gray-400">Name</span>
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Name
+                  </span>
                   <input
                     {...register("name", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -85,7 +90,9 @@ const Register = () => {
                   />
                 </label>
                 <label className="block text-sm mt-4">
-                  <span className="text-gray-700 dark:text-gray-400">Email</span>
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Email
+                  </span>
                   <input
                     {...register("email", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -95,7 +102,9 @@ const Register = () => {
                   />
                 </label>
                 <label className="block text-sm mt-4">
-                  <span className="text-gray-700 dark:text-gray-400">Phone</span>
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Phone
+                  </span>
                   <input
                     {...register("phone", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -105,23 +114,22 @@ const Register = () => {
                   />
                 </label>
                 <label className="block mt-4 text-sm">
-                  <span className="text-gray-700 dark:text-gray-400">Course Name</span>
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Course Name
+                  </span>
                   <select
                     {...register("course_name", { required: true })}
                     name="course_name"
-                    className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                  >
+                    className="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                     <option>Select Course</option>
-                    {courses.map((course) => (
-                      <option key={course.id} value={course.course_name}>
-                        {course.course_name}-{course.batch_no}
-                      </option>
-                    ))}
+                    {courses.map(course => <option key={course.id} value={course.course_name}>{course.course_name}-{course.batch_no}</option>)}
                   </select>
                 </label>
 
-                <label className="block text-sm mt-4">
-                  <span className="text-gray-700 dark:text-gray-400">Batch No.</span>
+                <label className="block text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Batch No.
+                  </span>
                   <input
                     {...register("batch_no", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -131,8 +139,10 @@ const Register = () => {
                   />
                 </label>
 
-                <label className="block text-sm mt-4">
-                  <span className="text-gray-700 dark:text-gray-400">Admission Slip No</span>
+                <label className="block mt-4 text-sm">
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Admission Slip No
+                  </span>
                   <input
                     {...register("admission_slip_no", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -142,7 +152,9 @@ const Register = () => {
                   />
                 </label>
                 <label className="block mt-4 text-sm">
-                  <span className="text-gray-700 dark:text-gray-400">Password</span>
+                  <span className="text-gray-700 dark:text-gray-400">
+                    Password
+                  </span>
                   <input
                     {...register("password", { required: true })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"

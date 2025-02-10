@@ -12,11 +12,12 @@ const Courses = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const { student } = useStudent();
 
+
   // load course data
-  useMemo(() => {
+  useEffect(() => {
     axios.get(`${BASE_URL}/student/course/show/${student?.course_name}/${student?.batch_no}`).then((res) => {
-      setLoading(false)
       setCourse(res.data);
+      setLoading(false)
     });
   }, [BASE_URL, student?.batch_no, student?.course_name]);
 
@@ -24,9 +25,7 @@ const Courses = () => {
   return (
     <>
       {
-        loading ? <div className="h-screen flex justify-center items-center">
-          <p className="text-2xl dark:text-gray-200">Loading...</p>
-        </div> : <div className="container px-6 mx-auto grid">
+        loading ? <div className="text-red">Loading</div> : <div className="container px-6 mx-auto grid">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             আমার কোর্সসমূহ
           </h2>

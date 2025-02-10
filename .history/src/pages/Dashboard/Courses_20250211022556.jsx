@@ -18,15 +18,13 @@ const Courses = () => {
       setLoading(false)
       setCourse(res.data);
     });
-  }, [BASE_URL, student?.batch_no, student?.course_name]);
+  }, [student.id]);
 
   console.log(course);
   return (
     <>
       {
-        loading ? <div className="h-screen flex justify-center items-center">
-          <p className="text-2xl dark:text-gray-200">Loading...</p>
-        </div> : <div className="container px-6 mx-auto grid">
+        loading ? <div className="dark:text-gray-200">Loading</div> : <div className="container px-6 mx-auto grid">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             আমার কোর্সসমূহ
           </h2>

@@ -4,7 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/MainRouter.jsx";
 import { Toaster } from "react-hot-toast";
-import { StudentProvider } from "./StudentContext.jsx";
+import { StudentProvider } from "./StudentContext.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

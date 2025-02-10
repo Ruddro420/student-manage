@@ -20,7 +20,8 @@ const Register = () => {
   }, [BASE_URL]);
 
   const onSubmit = (data) => {
-    axios.post(`${BASE_URL}/create/account`, {
+    axios
+      .post(`${BASE_URL}/create/account`, {
         name: data.name,
         email: data.email,
         phone: data.phone,
@@ -28,26 +29,25 @@ const Register = () => {
         batch_no: data.batch_no,
         admission_slip_no: data.admission_slip_no,
         password: data.password,
-    })
-    .then(function (res) {
+      })
+      .then((res) => {
         const studentData = res.data.student;
-        toast.success('Register Successfully');
-        // setStudentId(studentData.id);
 
-        // Save to localStorage
-        localStorage.setItem('student', JSON.stringify(studentData));
+        // ✅ Save student data to local storage
+        localStorage.setItem("student", JSON.stringify(studentData));
 
-        // Update context
+        // ✅ Fetch student data from context if needed
         fetchStudentData(studentData.id);
 
+        toast.success("Registered Successfully");
         reset();
-    })
-    .catch(function (error) {
-        console.error(error);
-        toast.error(error.message);
-    });
-};
-
+        navigate("/dashboard"); // Redirect to dashboard or login
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.response?.data?.message || "Registration Failed");
+      });
+  };
 
   return (
     <>
