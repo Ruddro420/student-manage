@@ -46,7 +46,7 @@ const Assingment = () => {
     };
     axios
       .post(`${BASE_URL}/submit/assingment`, data)
-      .then(function () {
+      .then(function (res) {
         toast.success('Assignment submitted successfully');
         navigate('/dashboard/submit-assignment')
         loadData();

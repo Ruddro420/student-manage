@@ -86,7 +86,7 @@ const Sidebar = () => {
                     <li className="relative px-2 py-3">
                         <Link
                             className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  dark:hover:text-gray-200 p-3 ${activeTab === 3 ? 'bg-purple-600 text-white p-3 rounded' : ''}`}
-                            to="/dashboard/submit-assignment"
+                            to="/dashboard/performances"
                             onClick={() => setActiveTab(3)}>
                             <svg
                                 className="w-5 h-5"

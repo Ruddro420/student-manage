@@ -1,24 +1,20 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import data from '../../../data/module.json';
 import { useEffect, useState } from "react";
 import { ClipboardCheckIcon, Link } from "lucide-react";
 import axios from "axios";
 import { formatDate } from "../../components/Date/date";
-import { useStudent } from "../../StudentContext";
-import toast from "react-hot-toast";
 
 const Assingment = () => {
   const [getData, setGetData] = useState();
   const { id } = useParams();
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  // student context
-  const { student } = useStudent();
 
 
   const loadData = () => {
     axios.get(`${BASE_URL}/assingment/specificData/${id}`).then((res) => {
-      setGetData(res.data.assingments[0]);
-      //   setLoading(false);
+        setGetData(res.data.assingments[0]);
+    //   setLoading(false);
 
     });
   };
@@ -27,35 +23,7 @@ const Assingment = () => {
     loadData();
   }, [id]);
 
-  const navigate = useNavigate();
-
-
-  // submit assignment data
-  const hadnleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = {
-      s_id: student?.ex_1,
-      s_name: student?.name,
-      c_name: getData?.course_name,
-      batch_no: getData?.batch_no,
-      s_phone: student?.phone,
-      a_name: getData?.assing_name,
-      a_link: formData.get("aLink"),
-      m_name: getData?.module_name,
-    };
-    axios
-      .post(`${BASE_URL}/submit/assingment`, data)
-      .then(function () {
-        toast.success('Assignment submitted successfully');
-        navigate('/dashboard/submit-assignment')
-        loadData();
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  }
-
+console.log(getData);
 
   return (
     <div className="container px-6 mx-auto grid">
@@ -91,7 +59,7 @@ const Assingment = () => {
               <b className="bg-[#12B76A] text-white px-5 py-1 rounded">১০</b> ১০
               এর মধ্যে
             </h2> */}
-            {/*  <div className="mt-8">
+           {/*  <div className="mt-8">
               <h4 className="text-[#12B76A] mb-3">ইন্সট্র্যাক্টর ফিডব্যাক</h4>
               <p>
                 Congratulations!! You have done very well. Keep up the good
@@ -122,7 +90,6 @@ const Assingment = () => {
                     placeholder={getData?.imLink}
                     type="url"
                     required
-                    name="aLink"
                   />
                   <button
                     type="submit"

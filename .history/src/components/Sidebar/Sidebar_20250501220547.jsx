@@ -86,31 +86,8 @@ const Sidebar = () => {
                     <li className="relative px-2 py-3">
                         <Link
                             className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  dark:hover:text-gray-200 p-3 ${activeTab === 3 ? 'bg-purple-600 text-white p-3 rounded' : ''}`}
-                            to="/dashboard/submit-assignment"
-                            onClick={() => setActiveTab(3)}>
-                            <svg
-                                className="w-5 h-5"
-                                aria-hidden="true"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"
-                                ></path>
-                                <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                            </svg>
-                            <span className="ml-4">আমার এসাইনমেন্ট</span>
-                        </Link>
-                    </li>
-                    <li className="relative px-2 py-3">
-                        <Link
-                            className={`inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  dark:hover:text-gray-200 p-3 ${activeTab === 4 ? 'bg-purple-600 text-white p-3 rounded' : ''}`}
                             to="/dashboard/performances"
-                            onClick={() => setActiveTab(4)}>
+                            onClick={() => setActiveTab(3)}>
                             <svg
                                 className="w-5 h-5"
                                 aria-hidden="true"

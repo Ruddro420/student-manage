@@ -1,11 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import data from '../../../data/module.json';
 import { useEffect, useState } from "react";
 import { ClipboardCheckIcon, Link } from "lucide-react";
 import axios from "axios";
 import { formatDate } from "../../components/Date/date";
 import { useStudent } from "../../StudentContext";
-import toast from "react-hot-toast";
 
 const Assingment = () => {
   const [getData, setGetData] = useState();
@@ -27,8 +26,7 @@ const Assingment = () => {
     loadData();
   }, [id]);
 
-  const navigate = useNavigate();
-
+  // console.log(getData);
 
   // submit assignment data
   const hadnleSubmit = (e) => {
@@ -46,15 +44,16 @@ const Assingment = () => {
     };
     axios
       .post(`${BASE_URL}/submit/assingment`, data)
-      .then(function () {
-        toast.success('Assignment submitted successfully');
-        navigate('/dashboard/submit-assignment')
+      .then(function (res) {
+        console.log(res.data);
         loadData();
       })
       .catch(function (error) {
         console.error(error);
       });
   }
+
+  // console.log(student);
 
 
   return (

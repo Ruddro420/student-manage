@@ -1,11 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import data from '../../../data/module.json';
 import { useEffect, useState } from "react";
 import { ClipboardCheckIcon, Link } from "lucide-react";
 import axios from "axios";
 import { formatDate } from "../../components/Date/date";
 import { useStudent } from "../../StudentContext";
-import toast from "react-hot-toast";
 
 const Assingment = () => {
   const [getData, setGetData] = useState();
@@ -27,11 +26,27 @@ const Assingment = () => {
     loadData();
   }, [id]);
 
-  const navigate = useNavigate();
-
+  console.log(getData);
 
   // submit assignment data
   const hadnleSubmit = (e) => {
+
+    /* 
+  
+       $table->string('s_name')->nullable();
+              $table->string('s_id')->nullable();
+              $table->string('c_name')->nullable();
+              $table->string('batch_no')->nullable();
+              $table->string('s_phone')->nullable();
+              $table->string('a_name')->nullable();
+              $table->string('a_link')->nullable();
+              $table->string('m_name')->nullable();
+              $table->string('sub_date')->nullable();
+              $table->string('ex_1')->nullable();
+              $table->string('ex_2')->nullable();
+    
+    
+    */
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
@@ -46,15 +61,16 @@ const Assingment = () => {
     };
     axios
       .post(`${BASE_URL}/submit/assingment`, data)
-      .then(function () {
-        toast.success('Assignment submitted successfully');
-        navigate('/dashboard/submit-assignment')
+      .then(function (res) {
+        console.log(res.data);
         loadData();
       })
       .catch(function (error) {
         console.error(error);
       });
   }
+
+  console.log(student);
 
 
   return (
