@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 // import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStudent } from "../../StudentContext";
+import Spin from "../../components/Spin";
 // import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Courses = () => {
@@ -33,9 +34,7 @@ const Courses = () => {
   return (
     <>
       {
-        loading ? <div className="h-screen flex justify-center items-center">
-          <p className="text-2xl dark:text-gray-200">Loading...</p>
-        </div> : <div className="container px-6 mx-auto grid">
+        loading ? <Spin/> : <div className="container px-6 mx-auto grid">
           <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             আমার কোর্সসমূহ
           </h2>

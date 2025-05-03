@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import TabComponent from "./TabComponent";
 import { useStudent } from "../../StudentContext";
 import axios from "axios";
+import Spin from "../../components/Spin";
 
 const Recording = () => {
     const [course, setCourse] = useState([])
@@ -19,6 +20,10 @@ const Recording = () => {
     }, [BASE_URL, student?.batch_no, student?.course_name]);
 
     return (
+        <>
+        {loading ? (<Spin/>):(
+
+      
         <div className="container px-2 lg:px-6 mx-auto grid">
             <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                 ক্লাস রেকর্ডিং সমূহ
@@ -26,6 +31,9 @@ const Recording = () => {
             {/* Tab Component */}
             <TabComponent data={course} />
         </div>
+
+)}
+        </>
     );
 };
 

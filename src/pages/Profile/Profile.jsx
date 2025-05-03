@@ -1,7 +1,8 @@
-import { Check } from "lucide-react";
+import { useStudent } from "../../StudentContext";
 
 
 const Profile = () => {
+    const { student } = useStudent();
  /*  const { user } = useAuth();
   const { data } = user;
   console.log(data); */
@@ -28,7 +29,7 @@ const Profile = () => {
                 </span>
                 <input
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  value= {data.batch}
+                  value= {student.batch_no}
                   placeholder="পুরো নাম"
                   type="text"
                   disabled
@@ -42,7 +43,7 @@ const Profile = () => {
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="example@example.com"
                   type="email"
-                  value={data.email}
+                  value={student.email}
                   disabled
                 />
               </label>
@@ -54,7 +55,7 @@ const Profile = () => {
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Your Phone"
                   type="number"
-                  value={data.admission_slip}
+                  value={student.admission_slip_no}
                   disabled
                 />
               </label>
@@ -76,7 +77,7 @@ const Profile = () => {
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="Your Phone"
                   type="number"
-                  value={data.phone}
+                  value={student.phone}
                   disabled
                 />
               </label>
@@ -104,7 +105,7 @@ const Profile = () => {
                   className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                   placeholder="পাসওয়ার্ড পরিবর্তন"
                   type="text"
-                  value={data.password}
+                  value={student.password}
                   disabled
                 />
               </label>
