@@ -10,6 +10,7 @@ const ProfileMenu = () => {
   
   const clearReloadFlag = () => {
     sessionStorage.removeItem('hasReloaded');
+    sessionStorage.removeItem('courseReloaded');
   };
   
   const handleLogout = () => {
