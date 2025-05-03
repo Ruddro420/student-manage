@@ -22,6 +22,13 @@ const CourseDetails = () => {
         // handle error
         console.log(error);
       })
+
+      const courseReloaded = sessionStorage.getItem('courseReloaded');
+  
+      if (!courseReloaded) {
+        sessionStorage.setItem('courseReloaded', 'true');
+        window.location.reload();
+      }
   }, []);
 
 
