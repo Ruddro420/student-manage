@@ -5,20 +5,27 @@ import { useStudent } from "../../StudentContext";
 
 const ProfileMenu = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-   const { logout } = useStudent();
-
-  const navigate = useNavigate()
-
+  const { logout } = useStudent();
+  const navigate = useNavigate();
+  
+  const clearReloadFlag = () => {
+    sessionStorage.removeItem('hasReloaded');
+  };
+  
   const handleLogout = () => {
+    clearReloadFlag(); // clear first
     logout()
       .then(() => {
         toast.success("Logout Successfully");
-        navigate('/login')
+        console.log("Logout completed");
+        navigate('/'); // then navigate
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  
+  
 
   return (
     <li className="relative">

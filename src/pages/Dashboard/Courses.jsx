@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { ArrowRightFromLine } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -12,8 +13,17 @@ const Courses = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const { student } = useStudent();
 
+  useEffect(() => {
+    const hasReloaded = sessionStorage.getItem('hasReloaded');
+  
+    if (!hasReloaded) {
+      sessionStorage.setItem('hasReloaded', 'true');
+      window.location.reload();
+    }
+  }, []);
   // load course data
   useMemo(() => {
+    
     axios.get(`${BASE_URL}/student/course/show/${student?.course_name}/${student?.batch_no}`).then((res) => {
       setLoading(false)
       setCourse(res.data);

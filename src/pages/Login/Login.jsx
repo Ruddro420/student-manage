@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-
-
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -13,6 +13,22 @@ const Login = () => {
 
   const [studentData, setStudentData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
+
+
+
+  useEffect(() => {
+    const storedStudent = localStorage.getItem("student");
+    if (storedStudent) {
+      navigate("/dashboard");
+    }
+}, []);
+
+
+
+
+
 
   // Get module data
   useEffect(() => {
@@ -28,32 +44,33 @@ const Login = () => {
         console.log(error);
         setLoading(false);
       });
+
+
+
   }, [BASE_URL]);
 
   const onSubmit = (data) => {
-
-
     /* check data.email & data.password with the studentData>> if found console.log(true) else false*/
     const found = studentData.find(
-      (student) => student.email === data.email && student.password === data.password
+      (student) =>
+        student.email === data.email && student.password === data.password
     );
     if (found) {
-      console.log("true");
-      // Save to localStorage
-      localStorage.setItem("student", JSON.stringify(found));
-      // Update context
-      // fetchStudentData(found.id);
-      // reset();
-      navigate("/dashboard");
+      if (found.status == 1) {
+        console.log("true");
+        // Save to localStorage
+        localStorage.setItem("student", JSON.stringify(found));
+        console.log(found);
+
+        navigate("/dashboard");
+      } else {
+        toast.error("Your account is Pending");
+      }
     } else {
       console.log("false");
       toast.error("Invalid email or password");
     }
-
-
   };
-
-
 
   return (
     <>

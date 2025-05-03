@@ -5,8 +5,7 @@ const StudentContext = createContext();
 
 export const StudentProvider = ({ children }) => {
     const [student, setStudent] = useState(null);
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
+    // const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     // Load student from localStorage on mount
     useEffect(() => {
         const storedStudent = localStorage.getItem("student");
@@ -17,9 +16,12 @@ export const StudentProvider = ({ children }) => {
 
      // Logout function
      const logout = () => {
-        localStorage.removeItem("student");
-        setStudent(null);
-    };
+        return new Promise((resolve) => {
+          localStorage.removeItem("student");
+          setStudent(null);
+          resolve(); // now .then() can be used
+        });
+      };
 
 
     return (

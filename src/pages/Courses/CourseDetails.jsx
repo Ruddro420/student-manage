@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //import useAuth from "../../hooks/useAuth";
 import { useParams } from "react-router-dom";
 import CourseTab from "./CourseTab";
