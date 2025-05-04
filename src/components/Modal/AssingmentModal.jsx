@@ -4,7 +4,17 @@ import { Link, MousePointer } from "lucide-react";
 import { dateFormat } from "../../lib/date";
 
 const AssingmentModal = ({ isOpen, setIsOpen, modalData }) => {
-
+    const entobn = (number) => {
+        const enDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+        const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
+      
+        return number
+          ?.toString()
+          .split("")
+          .map((digit) => (enDigits.includes(digit) ? bnDigits[enDigits.indexOf(digit)] : digit))
+          .join("");
+      };
+      
     return (
         <div className="relative z-10">
 
@@ -39,13 +49,12 @@ const AssingmentModal = ({ isOpen, setIsOpen, modalData }) => {
 
                                     <h2 className="text-2xl">
                                         মার্ক পেয়েছেন{" "}
-                                        <b className="bg-[#12B76A] text-white px-5 py-1 rounded">১০</b> ১০
+                                        <b className="bg-[#12B76A] text-white px-5 py-1 rounded">{entobn(modalData?.ex_1)}</b> ১০
                                         এর মধ্যে
                                     </h2>
                                     <h4 className="text-[#12B76A] mb-3 mt-5">ইন্সট্র্যাক্টর ফিডব্যাক</h4>
                                     <p>
-                                        Congratulations!! You have done very well. Keep up the good
-                                        work. Wish you all the best.
+                                        {modalData?.ex_2}
                                     </p>
                                     <div className="mt-5">
                                         <label className="block text-sm">

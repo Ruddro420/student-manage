@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ const AllAssignments = ({ data }) => {
     
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [assignments, setAssignments] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
 
   const loadData = () => {

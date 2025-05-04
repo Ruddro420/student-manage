@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import NotificationMenu from "./NotificationMenu";
 import ProfileMenu from "./ProfileMenu";
@@ -8,6 +9,7 @@ const Header = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeTab, setActiveTab] = useState(0);
     const [isCloseButtonVisible, setIsCloseButtonVisible] = useState(true);
+
 
     const handleToggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);

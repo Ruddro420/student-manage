@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { Eye } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import axios from "axios";
 import { useStudent } from "../../StudentContext";
 import NoDataFound from "../../components/NoDataFound/NoDataFound";
 import AssingmentModal from "../../components/Modal/AssingmentModal";
+import Spin from "../../components/Spin";
 
 const SubmitAssingment = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -48,15 +50,15 @@ const SubmitAssingment = () => {
         setIsOpen(true);
         setModalData(id);
     };
+    console.log(groupedAssignments);
+    
     return (
         <>
             <div className="container px-6 mx-auto grid">
                 <h2 className="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                     আমার এসাইনমেন্টসমূহ
                 </h2>
-                {loading ? (
-                    <p className="text-center">Loading...</p>
-                ) : Object.keys(groupedAssignments).length > 0 ? (
+                {loading ? (<Spin/>) : Object.keys(groupedAssignments).length > 0 ? (
                     <div className="module-container">
                         {Object.entries(groupedAssignments).map(([moduleName, moduleAssignments]) => (
                             <div key={moduleName} className="mb-5">

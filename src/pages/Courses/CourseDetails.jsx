@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //import useAuth from "../../hooks/useAuth";
 import { useParams } from "react-router-dom";
 import CourseTab from "./CourseTab";
@@ -21,6 +22,13 @@ const CourseDetails = () => {
         // handle error
         console.log(error);
       })
+
+      const courseReloaded = sessionStorage.getItem('courseReloaded');
+  
+      if (!courseReloaded) {
+        sessionStorage.setItem('courseReloaded', 'true');
+        window.location.reload();
+      }
   }, []);
 
 

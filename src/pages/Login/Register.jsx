@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
@@ -7,9 +8,10 @@ import { useStudent } from "../../StudentContext";
 
 const Register = () => {
   const [courses, setCourses] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
-  const { fetchStudentData } = useStudent(); // Fetch student data from context
+  // const { fetchStudentData } = useStudent(); // Fetch student data from context
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   // Load course data
@@ -37,23 +39,10 @@ const Register = () => {
         password: data.password,
         ex_1: generateStudentId(),
     })
-    .then(function (res) {
-        const studentData = res.data.student;
-        toast.success('Register Successfully');
-        // setStudentId(studentData.id);
-
-        // Save to localStorage
-        localStorage.setItem('student', JSON.stringify(studentData));
-
-        // Update context
-        fetchStudentData(studentData.id);
-
-        reset();
+    .then(function () {
+      navigate("/");
     })
-    .catch(function (error) {
-        console.error(error);
-        toast.error(error.message);
-    });
+    
 };
 
 
