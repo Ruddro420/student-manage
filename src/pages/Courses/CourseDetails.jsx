@@ -35,7 +35,7 @@ const CourseDetails = () => {
   return (
     <>
       {course ? (
-        <div className="container px- lg:px-6 mx-auto grid">
+        <div className="container px-4 lg:px-6 mx-auto grid">
           <h2 className="my-6 lg:px-0 px-4 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             {course.course_name} - {course.batch_no}
           </h2>
