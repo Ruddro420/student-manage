@@ -49,9 +49,9 @@ const Login = () => {
 
   const onSubmit = (data) => {
     /* check data.email & data.password with the studentData>> if found console.log(true) else false*/
-    const found = studentData.find(
+    const found = studentData?.find(
       (student) =>
-        student.email === data.email && student.password === data.password
+        student?.email === data.email && student.password === data.password
     );
     if (found) {
       if (found.status == 1) {
