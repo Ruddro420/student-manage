@@ -10,16 +10,41 @@ const Register = () => {
   const [courses, setCourses] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   // const { fetchStudentData } = useStudent(); // Fetch student data from context
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const [loading, setLoading] = useState(true);
 
-  // Load course data
+  const [studentData, setStudentData] = useState([]);
+
+
   useEffect(() => {
+    // Load course data
     axios.get(`${BASE_URL}/course/data`).then((res) => {
       setCourses(res.data.courses);
     });
+
+
+    /* fetch all account data */
+    axios
+      .get(`${BASE_URL}/account/data`)
+      .then(function (response) {
+        console.log(response);
+
+        setStudentData(response.data.student);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoading(false);
+      });
+
+
   }, [BASE_URL]);
+
+
+
+
 
   // generate unique student id
   const generateStudentId = () => {
@@ -29,7 +54,12 @@ const Register = () => {
   };
 
   const onSubmit = (data) => {
-    axios.post(`${BASE_URL}/create/account`, {
+
+    if (studentData?.find((student) => student.email === data.email)) {
+      toast.error("Email already exists.");
+      return;
+    } else {
+      axios.post(`${BASE_URL}/create/account`, {
         name: data.name,
         email: data.email,
         phone: data.phone,
@@ -38,12 +68,15 @@ const Register = () => {
         admission_slip_no: data.admission_slip_no,
         password: data.password,
         ex_1: generateStudentId(),
-    })
-    .then(function () {
-      navigate("/");
-    })
-    
-};
+      })
+        .then(function () {
+          navigate("/");
+        })
+    }
+
+
+
+  };
 
 
   return (
@@ -141,12 +174,21 @@ const Register = () => {
                 <label className="block mt-4 text-sm">
                   <span className="text-gray-700 dark:text-gray-400">Password</span>
                   <input
-                    {...register("password", { required: true })}
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                    })}
                     className="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                     placeholder="***************"
                     type="password"
                     name="password"
                   />
+                  {errors.password && (
+                    <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
+                  )}
                 </label>
                 <button
                   type="submit"
