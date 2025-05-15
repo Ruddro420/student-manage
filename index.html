@@ -31,25 +31,33 @@
     <script src="./assets/js/charts-pie.js" defer></script> -->
   </head>
   <body oncontextmenu="return false">
-    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
+      document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        alert("Inspect is not allowed!");
+      });
       document.onkeydown = (e) => {
         if (e.key == 123) {
           e.preventDefault();
+          alert("Inspect is not allowed!");
         }
         if (e.ctrlKey && e.shiftKey && e.key == "I") {
           e.preventDefault();
+          alert("Inspect is not allowed!");
         }
         if (e.ctrlKey && e.shiftKey && e.key == "C") {
           e.preventDefault();
+          alert("Inspect is not allowed!");
         }
         if (e.ctrlKey && e.shiftKey && e.key == "J") {
           e.preventDefault();
+          alert("Inspect is not allowed!");
         }
         if (e.ctrlKey && e.key == "U") {
           e.preventDefault();
+          alert("Inspect is not allowed!");
         }
       };
     </script>
