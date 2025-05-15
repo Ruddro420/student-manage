@@ -25,7 +25,7 @@ const VideoPlayer = () => {
                 console.error("Error fetching data:", error);
                 setGetData(null); // Handle error state
             });
-    }, [id]);
+    }, [BASE_URL, id]);
 
     const isValidYouTubeUrl = (url) => {
         const regex = /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;

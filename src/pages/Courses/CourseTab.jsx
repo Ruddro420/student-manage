@@ -21,7 +21,7 @@ const CourseTab = ({ course, updateData }) => {
                 setLoading(false);
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error);w
                 setLoading(false);
             });
     }, [BASE_URL]);

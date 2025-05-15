@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://aliruddro.site/wp-content/uploads/2024/05/object-3d-1-1-1.png" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://aliruddro.site/wp-content/uploads/2024/05/object-3d-1-1-1.png"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Manage</title>
     <link
@@ -23,12 +27,31 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer
     ></script>
-  <!--   <script src="./assets/js/charts-lines.js" defer></script>
+    <!--   <script src="./assets/js/charts-lines.js" defer></script>
     <script src="./assets/js/charts-pie.js" defer></script> -->
-     
   </head>
-  <body>
+  <body oncontextmenu="return false">
+    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      document.onkeydown = (e) => {
+        if (e.key == 123) {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && e.key == "I") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && e.key == "C") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.shiftKey && e.key == "J") {
+          e.preventDefault();
+        }
+        if (e.ctrlKey && e.key == "U") {
+          e.preventDefault();
+        }
+      };
+    </script>
   </body>
 </html>
