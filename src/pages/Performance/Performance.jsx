@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import AssingPerformance from "./AssingPerformance";
-import ProgressBar from "./ProgressBar";
 import axios from "axios";
 import { useStudent } from "../../StudentContext";
+import Spin from "../../components/Spin";
 
 // Utility function to convert numbers to Bengali
 const convertToBengali = (num) => {
@@ -13,7 +12,7 @@ const convertToBengali = (num) => {
 };
 
 const Performance = () => {
- 
+
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const [totalAssignmentsSubmitted, setTotalAssignmentsSubmitted] = useState(0);
   const [totalCourseAssignment, setTotalCourseAssignment] = useState(0);
@@ -37,7 +36,7 @@ const Performance = () => {
       })
       .catch(function (error) {
         console.log(error);
-        setLoading(false);
+        // setLoading(false);
       });
 
     /* total assignment */
@@ -48,11 +47,11 @@ const Performance = () => {
 
         setTotalCourseAssignment(response.data.total);
         console.log(response.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
-        setLoading(false);
+        // setLoading(false);
       });
 
 
@@ -64,14 +63,14 @@ const Performance = () => {
 
         setTotalPresence(response.data.total);
         console.log(response.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
-        setLoading(false);
+        // setLoading(false);
       });
 
-      /* Total Payment */
+    /* Total Payment */
     axios
       .get(`${BASE_URL}/student/payment/${student.ex_1}`)
       .then(function (response) {
@@ -79,11 +78,11 @@ const Performance = () => {
 
         setTotalPayment(response.data.total);
         console.log(response.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
-        setLoading(false);
+        // setLoading(false);
       });
 
     axios
@@ -93,11 +92,11 @@ const Performance = () => {
 
         setAssinments(response.data);
         console.log(response.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
-        setLoading(false);
+        // setLoading(false);
       });
 
     axios
@@ -121,7 +120,7 @@ const Performance = () => {
 
 
   return (
-    <>
+    <>{loading ? <Spin /> :
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-white">পারফর্মেন্স</h1>
@@ -216,41 +215,6 @@ const Performance = () => {
         </div>
 
 
-        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-semibold text-gray-800">Payment Trends</h3>
-              <select className="bg-gray-100 border-0 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Last 7 days</option>
-                <option>Last 30 days</option>
-                <option selected>Last 90 days</option>
-              </select>
-            </div>
-            <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-
-              <p className="text-gray-400">Payment chart visualization</p>
-            </div>
-          </div>
-
-
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-semibold text-gray-800">Assignment Completion</h3>
-              <select className="bg-gray-100 border-0 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>By Week</option>
-                <option selected>By Month</option>
-                <option>By Quarter</option>
-              </select>
-            </div>
-            <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-
-              <p className="text-gray-400">Assignment completion chart</p>
-            </div>
-          </div>
-        </div>
-*/}
-
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
             <h3 className="text-lg font-semibold text-gray-800">Submited Assignment Details</h3>
@@ -262,41 +226,41 @@ const Performance = () => {
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assignment Name</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Module Name</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Marks</th>
-                
+
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {assinments.map((assignment, index) => (
-                <tr key={index}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">JD</div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{assignment.a_name}</div>
+                {assinments.map((assignment, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">JD</div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">{assignment.a_name}</div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{assignment.m_name}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{assignment.ex_1}</div>
-                    <div className="text-sm text-gray-500">Out of 10</div>
-                  </td>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{assignment.m_name}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{assignment.ex_1}</div>
+                      <div className="text-sm text-gray-500">Out of 10</div>
+                    </td>
 
-                </tr>
-))}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-         {/*  <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+          {/*  <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
             <div className="text-sm text-gray-500">Showing <span className="font-medium">1</span> to <span className="font-medium">3</span> of <span className="font-medium">24</span> students</div>
             <div className="flex space-x-2">
               <button className="px-3 py-1 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</button>
               <button className="px-3 py-1 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Next</button>
             </div>
           </div> */}
-        </div> 
+        </div>
 
         {/* Payment History */}
         <div className="mt-10 bg-white rounded-xl shadow-md overflow-hidden">
@@ -309,42 +273,42 @@ const Performance = () => {
                 <tr>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ammount</th>
-                
+
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {payments.map((payment, index) => (
-                <tr key={index}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">JD</div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{payment.date}</div>
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">JD</div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">{payment.date}</div>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{payment.payment} ৳</div>
-                  </td>
-                  
-                </tr>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{payment.payment} ৳</div>
+                    </td>
+
+                  </tr>
                 ))}
 
               </tbody>
             </table>
           </div>
- {/*          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+          {/*          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
             <div className="text-sm text-gray-500">Showing <span className="font-medium">1</span> to <span className="font-medium">3</span> of <span className="font-medium">24</span> students</div>
             <div className="flex space-x-2">
               <button className="px-3 py-1 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</button>
               <button className="px-3 py-1 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">Next</button>
             </div>
           </div> */}
-        </div> 
+        </div>
 
 
       </div>
-
+    }
     </>
   );
 };

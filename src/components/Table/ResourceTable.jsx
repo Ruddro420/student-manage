@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { Eye } from "lucide-react";
 import ResourcesModal from "../Modal/ResourcesModal";
@@ -5,8 +6,9 @@ import { useEffect, useState } from "react";
 import { dateFormat } from "../../lib/date";
 import axios from "axios";
 import NoDataFound from "../NoDataFound/NoDataFound";
+import Spin from "../Spin";
 
-const ResourceTable = ({ data, updateData }) => {
+const ResourceTable = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState();
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -30,7 +32,7 @@ const ResourceTable = ({ data, updateData }) => {
     if (data?.id) {
       loadData();
     }
-  }, [data?.id]);
+  }, [data?.id, loadData]);
 
   // Ensure `assignments` is an array before calling reduce
   const groupedAssignments = (assignments || []).reduce((acc, assignment) => {
@@ -48,7 +50,7 @@ const ResourceTable = ({ data, updateData }) => {
   return (
     <>
       {loading ? (
-        <p className="text-center">Loading...</p>
+        <p className="text-center"><Spin/></p>
       ) : Object.keys(groupedAssignments).length > 0 ? (
         <div className="module-container">
           {Object.entries(groupedAssignments).map(([moduleName, moduleAssignments]) => (
