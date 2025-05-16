@@ -8,6 +8,7 @@ import { dateFormat } from "../../lib/date";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NoDataFound from "../../components/NoDataFound/NoDataFound";
+import Spin from "../../components/Spin";
 
 const LiveClass = ({ data, updateData }) => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -45,7 +46,7 @@ const LiveClass = ({ data, updateData }) => {
   return (
     <>
       {loading ? (
-        <p className="text-center">Loading...</p>
+        <p className="text-center"><Spin/></p>
       ) : Object.keys(groupedAssignments).length > 0 ? (
         <div className="module-container">
           {Object.entries(groupedAssignments).map(([moduleName, moduleAssignments]) => (

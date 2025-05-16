@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import axios from "axios";
+import { FaPause, FaPlay } from "react-icons/fa";
+import { BsFillSkipBackwardBtnFill, BsFillSkipForwardBtnFill } from "react-icons/bs";
+import Spin from "../../components/Spin";
 
 const VideoPlayer = () => {
     const [getData, setGetData] = useState(null);
-    const [isValidUrl, setIsValidUrl] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isValidUrl, setIsValidUrl] = useState(false);
+    const [paused, setPaused] = useState(true);
     const [playerError, setPlayerError] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const playerRef = useRef(null);
@@ -52,7 +56,7 @@ const VideoPlayer = () => {
             .then((res) => {
                 const foundData = res.data?.recording || null;
                 setGetData(foundData);
-
+                // setLoading(false);
                 if (foundData?.vLink) {
                     setIsValidUrl(validateYouTubeUrl(foundData.vLink));
                 } else {
@@ -104,9 +108,7 @@ const VideoPlayer = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-64">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-            </div>
+            <Spin />
         );
     }
 
@@ -164,18 +166,32 @@ const VideoPlayer = () => {
                                         },
                                     }}
                                 />
-                                <div className="absolute bottom-4 left-4 z-20 flex gap-4">
+                                <div className="absolute  bottom-4 left-0 md:left-4 z-20 flex gap-4 -mb-24 md:mb-0">
+                                    {paused ?
+                                        <button
+                                            onClick={() => {setIsPlaying(true); setPaused(false)}}
+                                            className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800"
+                                        >
+                                            <FaPlay size={20} />
+
+                                        </button> :
+                                        <button
+                                            onClick={() => {setIsPlaying(false); setPaused(true)}}
+                                            className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800"
+                                        >
+                                            <FaPause size={20} />
+                                        </button>
+                                    }
                                     <button
-                                        onClick={() => setIsPlaying(true)}
-                                        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                        onClick={() => {
+                                            if (playerRef.current) {
+                                                const currentTime = playerRef.current.getCurrentTime();
+                                                playerRef.current.seekTo(currentTime - 20, "seconds");
+                                            }
+                                        }}
+                                        className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800"
                                     >
-                                        ▶️ Play
-                                    </button>
-                                    <button
-                                        onClick={() => setIsPlaying(false)}
-                                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-                                    >
-                                        ⏸️ Pause
+                                        <BsFillSkipBackwardBtnFill size={25} />
                                     </button>
                                     <button
                                         onClick={() => {
@@ -184,9 +200,9 @@ const VideoPlayer = () => {
                                                 playerRef.current.seekTo(currentTime + 20, "seconds");
                                             }
                                         }}
-                                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                        className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800"
                                     >
-                                        ⏩ Skip +20s
+                                        <BsFillSkipForwardBtnFill size={25} /> {/* +20s */}
                                     </button>
                                 </div>
                             </>
@@ -197,7 +213,7 @@ const VideoPlayer = () => {
                         )}
                     </div>
 
-                    <div className="mt-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                    <div className="mt-24 md:mt-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
                         <p className="text-blue-700">
                             <strong>নোট:</strong> এই ভিডিওটি শুধুমাত্র দেখার জন্য। শেয়ার করা বা ডাউনলোড করা নিষিদ্ধ।
                         </p>

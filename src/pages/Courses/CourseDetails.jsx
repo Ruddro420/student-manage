@@ -10,41 +10,39 @@ const CourseDetails = () => {
   const { id } = useParams();
   const [course, setCourese] = useState([]);
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-
+  const [loading, setLoading] = useState(true);
   // load data
   useEffect(() => {
     axios.get(`${BASE_URL}/course/show/${id}`)
       .then((res) => {
         setCourese(res.data.course);
+        setLoading(false);
       })
       .catch(function (error) {
-        // handle error
+        setLoading(false);
         console.log(error);
       })
 
-      const courseReloaded = sessionStorage.getItem('courseReloaded');
-  
-      if (!courseReloaded) {
-        sessionStorage.setItem('courseReloaded', 'true');
-        window.location.reload();
-      }
+    const courseReloaded = sessionStorage.getItem('courseReloaded');
+
+    if (!courseReloaded) {
+      sessionStorage.setItem('courseReloaded', 'true');
+      window.location.reload();
+    }
   }, []);
 
 
   return (
     <>
-      {course ? (
+      {loading ? (
+        <Spin />
+      ) : (
         <div className="container px-4 lg:px-6 mx-auto grid">
           <h2 className="my-6 lg:px-0 px-4 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             {course.course_name} - {course.batch_no}
           </h2>
           <CourseTab course={course} /* updateData={updateData} */ />
         </div>
-      ) : (
-        <span>
-          <Spin />
-        </span>
       )}
     </>
   );
