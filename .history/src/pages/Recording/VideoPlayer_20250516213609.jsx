@@ -13,16 +13,19 @@ const VideoPlayer = () => {
     const { id } = useParams();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+    // Disable right-click and dev tools
     useEffect(() => {
         const handleContextMenu = (e) => {
             e.preventDefault();
             alert("Right-click is disabled to protect content");
+            return false;
         };
 
         const handleKeyDown = (e) => {
             if (
                 e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && ['I', 'J'].includes(e.key)) ||
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
                 (e.ctrlKey && e.key === 'U') ||
                 e.key === 'PrintScreen'
             ) {
@@ -40,6 +43,7 @@ const VideoPlayer = () => {
         };
     }, []);
 
+    // Fetch video data
     useEffect(() => {
         setLoading(true);
         setPlayerError(false);
@@ -68,18 +72,25 @@ const VideoPlayer = () => {
             });
     }, [BASE_URL, id]);
 
+    // Validate YouTube link
     const validateYouTubeUrl = (url) => {
         try {
             const parsed = new URL(url);
-            const hostname = parsed.hostname;
-            const isYouTube = hostname.includes('youtube.com') || hostname.includes('youtu.be');
-            const hasId = parsed.searchParams.get('v') || parsed.pathname.length > 1;
-            return isYouTube && hasId;
+            return (
+                (parsed.hostname.includes('youtube.com') ||
+                    parsed.hostname.includes('youtu.be')) &&
+                (parsed.pathname.includes('/watch') ||
+                    parsed.pathname.includes('/embed') ||
+                    parsed.pathname.includes('/v/') ||
+                    parsed.pathname.startsWith('/') ||
+                    parsed.searchParams.has('v'))
+            );
         } catch {
             return false;
         }
     };
 
+    // Transform to embeddable format
     const transformUnlistedUrl = (url) => {
         try {
             const parsed = new URL(url);
@@ -93,7 +104,7 @@ const VideoPlayer = () => {
 
             return `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0&controls=1&fs=0&enablejsapi=1`;
         } catch {
-            return '';
+            return url;
         }
     };
 
@@ -159,7 +170,7 @@ const VideoPlayer = () => {
                                                 rel: 0,
                                                 showinfo: 0,
                                                 fs: 0,
-                                                autoplay: 0,
+                                                autoplay: 1,
                                             },
                                         },
                                     }}
@@ -189,6 +200,7 @@ const VideoPlayer = () => {
                                         ⏩ Skip +20s
                                     </button>
                                 </div>
+
                             </>
                         ) : (
                             <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">

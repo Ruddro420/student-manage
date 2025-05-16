@@ -22,7 +22,8 @@ const VideoPlayer = () => {
         const handleKeyDown = (e) => {
             if (
                 e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && ['I', 'J'].includes(e.key)) ||
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
                 (e.ctrlKey && e.key === 'U') ||
                 e.key === 'PrintScreen'
             ) {
@@ -71,10 +72,14 @@ const VideoPlayer = () => {
     const validateYouTubeUrl = (url) => {
         try {
             const parsed = new URL(url);
-            const hostname = parsed.hostname;
-            const isYouTube = hostname.includes('youtube.com') || hostname.includes('youtu.be');
-            const hasId = parsed.searchParams.get('v') || parsed.pathname.length > 1;
-            return isYouTube && hasId;
+            return (
+                (parsed.hostname.includes('youtube.com') || parsed.hostname.includes('youtu.be')) &&
+                (parsed.pathname.includes('/watch') ||
+                    parsed.pathname.includes('/embed') ||
+                    parsed.pathname.includes('/v/') ||
+                    parsed.pathname.startsWith('/') ||
+                    parsed.searchParams.has('v'))
+            );
         } catch {
             return false;
         }
@@ -93,7 +98,7 @@ const VideoPlayer = () => {
 
             return `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0&controls=1&fs=0&enablejsapi=1`;
         } catch {
-            return '';
+            return url;
         }
     };
 
